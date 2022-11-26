@@ -13,17 +13,18 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
 
-  const [users, setUsers] = useState([])
+  const [videos, setVideos] = useState([])
 
     useEffect(() => {
-      console.log(DATA)
-      
+      setVideos(DATA.data.items);
+      console.log(videos)
+
       // fetchHomeVideos()
     }, [])
 
     const fetchHomeVideos = async () => {
       try {
-        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&videoEmbeddable=true&key=${KEY}`)
+        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=10&key=${KEY}`)
         console.log(response)
       } catch (error) {
         console.log(error)
@@ -60,16 +61,32 @@ const HomePage = () => {
 //   }, [token]);
 // })
   return (
-    <div className="container">
+    <div className="video-container">
       <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
+      {videos &&
+        videos.map((video) => (
+          <div key={video.id.videoId}>
+            <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description} />
+            <p key={video.id.videoId}>
+              {video.snippet.title} - {video.snippet.channelTitle}
+            </p>
+          </div>
+          
         ))}
     </div>
   );
 };
+
+// return (
+//   <div className="container">
+//     <h1>Home Page for {user.username}!</h1>
+//     {videos &&
+//       videos.map((video) => (
+//         <p key={videos.data.items.id}>
+//           {videos.data.items.snippet.title} - {videos.data.items.id.videoId}
+//         </p>
+//       ))}
+//   </div>
+// );
 
 export default HomePage;
