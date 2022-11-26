@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import {KEY} from "../../API_Credentials"
 import {DATA} from "../../API_Credentials"
+import "./HomePage.css"
 
 import axios from "axios";
 
@@ -30,6 +31,7 @@ const HomePage = () => {
         console.log(error)
       }
     }
+
 
 
 
@@ -61,12 +63,16 @@ const HomePage = () => {
 //   }, [token]);
 // })
   return (
-    <div className="video-container">
+    <div className="video-list-container">
       <h1>Home Page for {user.username}!</h1>
-      <input type='text' placeholder="Search for Videos"/>
-      {videos &&
+      <form>
+        <input type='text' placeholder="Search for Videos"/>
+        <button type='submit'>Search</button>
+      </form>
+      <div className="video-container">
+        {videos &&
         videos.map((video) => (
-          <div key={video.id.videoId}>
+          <div className="video" key={video.id.videoId}>
             <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description} />
             <p key={video.id.videoId}>
               {video.snippet.title} - {video.snippet.channelTitle}
@@ -74,6 +80,8 @@ const HomePage = () => {
           </div>
           
         ))}
+      </div>
+     
     </div>
   );
 };

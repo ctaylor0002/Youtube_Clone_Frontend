@@ -1,0 +1,23 @@
+
+.video-container {
+    display: grid;
+    grid-template-areas:
+        "top-l top top-r"
+        "mid-l mid mid-r"
+        "bot-l bot bot-r";
+    width: 100%;
+    margin: auto; 
+}
+
+.video-container div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20%;
+}
+
+.video {
+    display: flex;
+
+}
