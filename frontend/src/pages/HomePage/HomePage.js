@@ -15,6 +15,7 @@ const HomePage = () => {
   const [cars, setCars] = useState([]);
 
   const [videos, setVideos] = useState([])
+  const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
       setVideos(DATA.data.items);
@@ -22,6 +23,12 @@ const HomePage = () => {
 
       // fetchHomeVideos()
     }, [])
+
+    function handleSubmit(event) {
+          event.preventDefault();
+          searchHomeVideos();
+
+        }
 
     const fetchHomeVideos = async () => {
       try {
@@ -31,8 +38,17 @@ const HomePage = () => {
         console.log(error)
       }
     }
-
-
+   
+    const searchHomeVideos = async () => {
+            
+      try {
+        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?q=${searchValue}&part=snippet&type=video&maxResults=9&key=${KEY}`)
+        setVideos(response.data.items)
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
 
     // const fetchUsers = async () => {
@@ -65,8 +81,8 @@ const HomePage = () => {
   return (
     <div className="video-list-container">
       <h1>Home Page for {user.username}!</h1>
-      <form>
-        <input type='text' placeholder="Search for Videos"/>
+      <form onSubmit={handleSubmit}>
+        <input type='text' placeholder="Search for Videos" onChange={(event) => setSearchValue(event.target.value)}/>
         <button type='submit'>Search</button>
       </form>
       <div className="video-container">
