@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import {KEY} from "../../API_Credentials"
+import {DATA} from "../../API_Credentials"
 
 import axios from "axios";
 
@@ -11,21 +13,52 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
 
-  useEffect(() => {
-    const fetchCars = async () => {
+  const [users, setUsers] = useState([])
+
+    useEffect(() => {
+      console.log(DATA)
+      
+      // fetchHomeVideos()
+    }, [])
+
+    const fetchHomeVideos = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setCars(response.data);
+        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&videoEmbeddable=true&key=${KEY}`)
+        console.log(response)
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error)
       }
-    };
-    fetchCars();
-  }, [token]);
+    }
+
+
+
+    // const fetchUsers = async () => {
+    //   try {
+    //     let response = await axios.get("https://jsonplaceholder.typicode.com/users");
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+
+
+//   useEffect(() => {
+    
+//     const fetchCars = async () => {
+//       try {
+//         let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+//           headers: {
+//             Authorization: "Bearer " + token,
+//           },
+//         });
+//         setCars(response.data);
+//       } catch (error) {
+//         console.log(error.response.data);
+//       }
+//     };
+//     fetchCars();
+//   }, [token]);
+// })
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
