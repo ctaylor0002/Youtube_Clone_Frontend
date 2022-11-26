@@ -63,6 +63,7 @@ const HomePage = () => {
   return (
     <div className="video-container">
       <h1>Home Page for {user.username}!</h1>
+      <input type='text' placeholder="Search for Videos"/>
       {videos &&
         videos.map((video) => (
           <div key={video.id.videoId}>
