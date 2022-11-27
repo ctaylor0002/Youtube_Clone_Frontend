@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { KEY } from "../../API_Credentials";
 import { Link } from 'react-router-dom';
+import './VideoPage.css'
 
 const VideoPage = (props) => {
     const {videoID} = useParams();
@@ -36,16 +37,16 @@ const VideoPage = (props) => {
     }
 
     return ( 
-      <div>
+      <div className='main-frame'>
         <div className='video-frame'>
-          <iframe src={`https://www.youtube.com/embed/${videoID}`} title='Test'/>
+          <iframe className='main-video' src={`https://www.youtube.com/embed/${videoID}`} title='Test'/>
           <div>
             {currentVideoData &&
             currentVideoData.map((currentVideo) =>(
-              <div>
-                <h2>{currentVideo.snippet.title}</h2>
-                <h3>{currentVideo.snippet.channelTitle}</h3>
-                <p>{currentVideo.snippet.description}</p>
+              <div className='descriptions'>
+                <h2 className='title'>{currentVideo.snippet.title}</h2>
+                <h3 className='channel-title'>{currentVideo.snippet.channelTitle}</h3>
+                <p className='description'>{currentVideo.snippet.description}</p>
               </div>
             ))}
           </div>

@@ -1,0 +1,47 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.main-frame {
+    display: flex;
+}
+
+.main-video {
+    width: 90%;
+    height: 500px;
+    margin-left: 2em;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    margin-right: 2em;
+}
+
+.descriptions {
+    margin-left: 2em;
+    width: 60%;
+}
+
+.title {
+    font-size: 16px;
+}
+
+.channel-title {
+    font-size: 14px;
+}
+
+.description {
+    font-size: 12px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description:hover {
+    overflow: visible;
+    height: 100%;
+    background-color: lightgrey;
+}
