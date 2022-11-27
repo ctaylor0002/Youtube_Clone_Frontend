@@ -24,7 +24,7 @@ const HomePage = () => {
       // fetchHomeVideos()
     }, [])
 
-    function handleSubmit(event) {
+    function handleSearch(event) {
           event.preventDefault();
           searchHomeVideos();
 
@@ -36,6 +36,16 @@ const HomePage = () => {
         console.log(response)
       } catch (error) {
         console.log(error)
+      }
+    }
+
+    const clickVideo = async (videoId) => {
+      try {
+        console.log(videoId)
+        //let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${KEY}`)
+        //console.log(response);
+      } catch (error) {
+        console.log(error);
       }
     }
    
@@ -81,16 +91,16 @@ const HomePage = () => {
   return (
     <div className="video-list-container">
       <h1>Home Page for {user.username}!</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSearch}>
         <input type='text' placeholder="Search for Videos" onChange={(event) => setSearchValue(event.target.value)}/>
         <button type='submit'>Search</button>
       </form>
       <div className="video-container">
         {videos &&
         videos.map((video) => (
-          <div className="video" key={video.id.videoId}>
-            <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description} />
-            <p key={video.id.videoId}>
+          <div className="video" key={video.id.videoId} id={video.id.videoId} onClick={(event) => clickVideo(event.target.id)}>
+            <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description} id={video.id.videoId}/>
+            <p key={video.id.videoId} id={video.id.videoId}>
               {video.snippet.title} - {video.snippet.channelTitle}
             </p>
           </div>
