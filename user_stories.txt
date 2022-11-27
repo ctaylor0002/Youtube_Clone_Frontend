@@ -5,8 +5,10 @@
 (7.5 points) As a developer, I want to use CSS appropriately to make an aesthetically pleasing application.
 
 (10 points) As a developer, I want to use Axios to make GET requests to the YouTube API to pull in video data.
+COMPLETED
 
 (5 points) As a user, I want to be able to search for YouTube videos and see a page load with video options (represented as image thumbnails) related to my search. (API CALL #1)
+COMPLETED
 
 (5 points) As a user, I want to be able to click a video from the search, see a new page-load with the selected video, and play the YouTube video in an embedded video player using an iframe element.
 

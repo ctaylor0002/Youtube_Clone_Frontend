@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import {KEY} from "../../API_Credentials"
 import {DATA} from "../../API_Credentials"
 import "./HomePage.css"
+import { Link } from "react-router-dom"
 
 import axios from "axios";
 
@@ -18,10 +19,10 @@ const HomePage = () => {
   const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
-      setVideos(DATA.data.items);
+      //setVideos(DATA.data.items);
       console.log(videos)
 
-      // fetchHomeVideos()
+      fetchHomeVideos()
     }, [])
 
     function handleSearch(event) {
@@ -33,19 +34,10 @@ const HomePage = () => {
     const fetchHomeVideos = async () => {
       try {
         let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=10&key=${KEY}`)
+        setVideos(response.data.items)
         console.log(response)
       } catch (error) {
         console.log(error)
-      }
-    }
-
-    const clickVideo = async (videoId) => {
-      try {
-        console.log(videoId)
-        //let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${KEY}`)
-        //console.log(response);
-      } catch (error) {
-        console.log(error);
       }
     }
    
@@ -98,12 +90,15 @@ const HomePage = () => {
       <div className="video-container">
         {videos &&
         videos.map((video) => (
-          <div className="video" key={video.id.videoId} id={video.id.videoId} onClick={(event) => clickVideo(event.target.id)}>
-            <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description} id={video.id.videoId}/>
-            <p key={video.id.videoId} id={video.id.videoId}>
-              {video.snippet.title} - {video.snippet.channelTitle}
-            </p>
-          </div>
+          <Link to={`/${video.id.videoId}`} key={video.id.videoId}>
+            <div className="video" >
+              <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description}/>
+              <p key={video.id.videoId}>
+                {video.snippet.title} - {video.snippet.channelTitle}
+              </p>
+            </div>
+          </Link>
+          
           
         ))}
       </div>
