@@ -6,12 +6,24 @@ import { Link } from 'react-router-dom';
 
 const VideoPage = (props) => {
     const {videoID} = useParams();
+    const [currentVideoData, setCurrentVideoData] = useState([]);
     const [relatedVideos, setRelatedVideos] = useState([]);
 
     useEffect(() => {
+      getCurrentVideo();
       getRelatedVideos();
     }, [videoID])
 
+    const getCurrentVideo = async () => {
+      try {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?type=video&part=snippet&key=${KEY}&id=${videoID}`)
+        console.log(response)
+        setCurrentVideoData(response.data.items);
+        console.log(currentVideoData)
+      } catch (error) {
+        console.log(error);
+      }
+    }
     const getRelatedVideos = async () => {
       try {
             let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoID}&type=video&part=snippet&key=${KEY}`)
@@ -25,7 +37,22 @@ const VideoPage = (props) => {
 
     return ( 
       <div>
-        <iframe src={`https://www.youtube.com/embed/${videoID}`} title='Test'/>
+        <div className='video-frame'>
+          <iframe src={`https://www.youtube.com/embed/${videoID}`} title='Test'/>
+          <div>
+            {currentVideoData &&
+            currentVideoData.map((currentVideo) =>(
+              <div>
+                <h2>{currentVideo.snippet.title}</h2>
+                <h3>{currentVideo.snippet.channelTitle}</h3>
+                <p>{currentVideo.snippet.description}</p>
+              </div>
+            ))}
+          </div>
+          
+          
+        </div>
+
         <div className='video-container'>
           {relatedVideos &&
           relatedVideos.map((relatedVideo) => (

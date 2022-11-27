@@ -33,7 +33,7 @@ const HomePage = () => {
 
     const fetchHomeVideos = async () => {
       try {
-        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=10&key=${KEY}`)
+        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&maxResults=10&key=${KEY}`)
         setVideos(response.data.items)
         console.log(response)
       } catch (error) {
@@ -90,7 +90,7 @@ const HomePage = () => {
       <div className="video-container">
         {videos &&
         videos.map((video) => (
-          <Link to={`/${video.id.videoId}`} key={video.id.videoId}>
+          <Link to={`/${video.id.videoId}`} key={video.id.videoId} state={{title: (video.snippet.title), description: (video.snippet.description), channelTitle: (video.snippet.channelTitle)}}>
             <div className="video" >
               <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description}/>
               <p key={video.id.videoId}>
