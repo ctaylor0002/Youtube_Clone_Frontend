@@ -11,12 +11,16 @@ COMPLETED
 COMPLETED
 
 (5 points) As a user, I want to be able to click a video from the search, see a new page-load with the selected video, and play the YouTube video in an embedded video player using an iframe element.
+COMPLETED
 
 (5 points) As a user, I want to see the title and description of the currently playing video.
+COMPLETED
 
 (5 points) As a user, I want to see a grouping of videos related to my search next to the currently playing video. (API CALL #2)
+COMPLETED
 
 (5 points) As a user, I want to be able to select a video to be played from the list of related videos to my search that will become the currently playing video and load a new set of related videos.
+COMPLETED
 
 (7.5 points) As a registered user, I want to add a comment to a video in the comment section (Using Axios to make POST requests to my backend API). When comments are added to the backend for a specific video, I want to make a GET request every time that video is loaded as the currently playing video and see all comments for that video.
 

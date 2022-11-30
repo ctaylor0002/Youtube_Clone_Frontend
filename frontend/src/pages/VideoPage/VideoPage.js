@@ -4,17 +4,21 @@ import axios from 'axios';
 import { KEY } from "../../API_Credentials";
 import { Link } from 'react-router-dom';
 import './VideoPage.css'
+import useAuth from './../../hooks/useAuth';
 
 const VideoPage = (props) => {
+    const [user, token] = useAuth();
     const {videoID} = useParams();
     const [currentVideoData, setCurrentVideoData] = useState([]);
-    const [videoComments, setVideoComments] = useState([])
+    const [videoComments, setVideoComments] = useState([]);
     const [relatedVideos, setRelatedVideos] = useState([]);
+    const [commentData, setCommentData] = useState('');
 
     useEffect(() => {
       getCurrentVideo();
       getVideoComments();
       getRelatedVideos();
+      console.log(props)
     }, [videoID])
 
     const getCurrentVideo = async () => {
@@ -48,6 +52,23 @@ const VideoPage = (props) => {
       }
     }
 
+    const createComment = async () => {
+      try {
+        const postInfo = ({"video_id": videoID, "text": commentData, "likes": 0, "dislikes": 0});
+        let response = await axios.post(`http://127.0.0.1:8000/api/comments/${videoID}/comment/`, postInfo, {"headers": {Authorization: "Bearer " + token,}})
+        let tempComments = [...videoComments, response.data];
+        setVideoComments(tempComments);
+        setCommentData('');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      createComment();
+    }
+
     return ( 
       <div className='main-frame'>
         <div className='video-frame'>
@@ -61,8 +82,12 @@ const VideoPage = (props) => {
                 <p className='description'>{currentVideo.snippet.description}</p>
               </div>
             ))}
+            
             <div className='comments'>
-              <input placeholder='Add a comment...'/>
+              <form onSubmit={handleSubmit}>
+                <input placeholder='Add a comment...' value={commentData} onChange={(event) => setCommentData(event.target.value)}/>
+                <button type='submit'>Comment</button>
+              </form>
               {videoComments &&
               videoComments.map((videoComment) => (
                 <div>
@@ -78,7 +103,7 @@ const VideoPage = (props) => {
           
         </div>
 
-        <div className='video-container'>
+        <div className='related-videos'>
           {relatedVideos &&
           relatedVideos.map((relatedVideo) => (
             <Link to={`/${relatedVideo.id.videoId}`} key={relatedVideo.id.videoId}>

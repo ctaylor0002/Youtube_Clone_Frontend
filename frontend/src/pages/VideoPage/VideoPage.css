@@ -13,7 +13,10 @@ a {
     margin-left: 2em;
 }
 
-
+.related-videos {
+    display: flex;
+    flex-direction: column;
+}
 
 .descriptions {
     margin-left: 2em;
