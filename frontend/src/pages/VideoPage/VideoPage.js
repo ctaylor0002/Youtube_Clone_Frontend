@@ -84,10 +84,15 @@ const VideoPage = (props) => {
             ))}
             
             <div className='comments'>
-              <form onSubmit={handleSubmit}>
+              {user ? (
+                <form onSubmit={handleSubmit}>
                 <input placeholder='Add a comment...' value={commentData} onChange={(event) => setCommentData(event.target.value)}/>
                 <button type='submit'>Comment</button>
               </form>
+              ) : (
+                <h4>Please Login to leave comments.</h4>
+              )}
+              
               {videoComments &&
               videoComments.map((videoComment) => (
                 <div>
