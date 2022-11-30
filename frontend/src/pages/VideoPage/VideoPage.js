@@ -85,21 +85,27 @@ const VideoPage = (props) => {
             
             <div className='comments'>
               {user ? (
-                <form onSubmit={handleSubmit}>
-                <input placeholder='Add a comment...' value={commentData} onChange={(event) => setCommentData(event.target.value)}/>
-                <button type='submit'>Comment</button>
-              </form>
+                <form className='comment-form' onSubmit={handleSubmit}>
+                  <textarea rows={"3"} columns={"100"} className='comment-input' placeholder='Add a comment...' value={commentData} onChange={(event) => setCommentData(event.target.value)}/>
+                  <button className='button' type='submit'>Comment</button>
+                </form>
               ) : (
                 <h4>Please Login to leave comments.</h4>
               )}
               
               {videoComments &&
               videoComments.map((videoComment) => (
-                <div>
-                  <h4>{videoComment.user.username}</h4>
-                  <p>{videoComment.text}</p>
-                  <p>Likes:{videoComment.likes}</p>
-                  <p>Dislikes:{videoComment.dislikes}</p>
+                <div className='comment'>
+                  <div className='comment-header'>
+                    <h4>{videoComment.user.username}</h4>
+                  </div>
+                  <div className='comment-body'>
+                    <p className='comment-body-text'>{videoComment.text}</p>
+                  </div>
+                  <div className='comment-likes-dislikes'>
+                    <p className='likes'>Likes: {videoComment.likes}</p>
+                    <p className='dislikes'>Dislikes: {videoComment.dislikes}</p>
+                  </div>
                 </div>
               ))}
             </div>

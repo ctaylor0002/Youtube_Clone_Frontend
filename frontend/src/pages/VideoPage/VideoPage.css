@@ -3,6 +3,10 @@ a {
     color: black;
 }
 
+p {
+    font-size: 12px;
+}
+
 .main-frame {
     display: flex;
 }
@@ -33,13 +37,71 @@ a {
 
 .description {
     font-size: 12px;
-    height: 50px;
+    height: 56px;
     overflow: hidden;
     text-overflow: ellipsis;
+
+}
+
+.comment-form {
+    display: flex;
+}
+
+.comments {
+    margin: 1em 0em 0em 2em;
+    width: 92%;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.comment-input {
+    width: 85%;
+    font-size: 12px;
+    resize: none;
+} 
+
+.button {
+    margin-left: 2em;
+    padding: none;
+}
+.comment-body-text:hover {
+    overflow: visible;
+    height: 100%;
+    background-color: lightgrey;
+}
+
+/* .comment {
+    display: flex; 
+    flex-direction: row; 
+    
+} */
+
+.comment-body-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    height: 18px;
+}
+
+
+.comment-likes-dislikes {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.dislikes {
+    margin-left: 1em;
 }
 
 .description:hover {
     overflow: visible;
     height: 100%;
     background-color: lightgrey;
+}
+
+.video {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2em;
 }
