@@ -13,12 +13,7 @@ a {
     margin-left: 2em;
 }
 
-.video-container {
-    display: flex;
-    flex-direction: column;
-    float: right;
-    margin-right: 2em;
-}
+
 
 .descriptions {
     margin-left: 2em;

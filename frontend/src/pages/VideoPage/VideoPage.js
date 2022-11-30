@@ -8,10 +8,12 @@ import './VideoPage.css'
 const VideoPage = (props) => {
     const {videoID} = useParams();
     const [currentVideoData, setCurrentVideoData] = useState([]);
+    const [videoComments, setVideoComments] = useState([])
     const [relatedVideos, setRelatedVideos] = useState([]);
 
     useEffect(() => {
       getCurrentVideo();
+      getVideoComments();
       getRelatedVideos();
     }, [videoID])
 
@@ -36,6 +38,16 @@ const VideoPage = (props) => {
           }
     }
 
+    const getVideoComments = async () => {
+      try {
+        let response = await axios.get(`http://127.0.0.1:8000/api/comments/${videoID}/`)
+        console.log(response);
+        setVideoComments(response.data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     return ( 
       <div className='main-frame'>
         <div className='video-frame'>
@@ -49,6 +61,18 @@ const VideoPage = (props) => {
                 <p className='description'>{currentVideo.snippet.description}</p>
               </div>
             ))}
+            <div className='comments'>
+              <input placeholder='Add a comment...'/>
+              {videoComments &&
+              videoComments.map((videoComment) => (
+                <div>
+                  <h4>{videoComment.user.username}</h4>
+                  <p>{videoComment.text}</p>
+                  <p>Likes:{videoComment.likes}</p>
+                  <p>Dislikes:{videoComment.dislikes}</p>
+                </div>
+              ))}
+            </div>
           </div>
           
           
