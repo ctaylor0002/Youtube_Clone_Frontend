@@ -1,8 +1,10 @@
 (5 points): As a developer, I want to make good, consistent commits (at least 20 for both the backend and frontend).
 
 (5 points) As a developer, I want to use React.js best practices, which consists of creating function components and properly passing state around as props.
+COMPLETED
 
 (7.5 points) As a developer, I want to use CSS appropriately to make an aesthetically pleasing application.
+COMPLETED
 
 (10 points) As a developer, I want to use Axios to make GET requests to the YouTube API to pull in video data.
 COMPLETED
@@ -23,6 +25,7 @@ COMPLETED
 COMPLETED
 
 (7.5 points) As a registered user, I want to add a comment to a video in the comment section (Using Axios to make POST requests to my backend API). When comments are added to the backend for a specific video, I want to make a GET request every time that video is loaded as the currently playing video and see all comments for that video.
+COMPLETED
 
 NOTE: When viewing a video as a non-logged in guest, you should be able to see comments for the video but not be able to add a comment until logged in
 
