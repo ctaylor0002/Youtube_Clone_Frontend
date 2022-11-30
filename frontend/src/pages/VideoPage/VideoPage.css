@@ -9,6 +9,7 @@ p {
 
 .main-frame {
     display: flex;
+    padding-bottom: 50px;
 }
 
 .main-video {
@@ -104,4 +105,16 @@ p {
     display: flex;
     flex-direction: column;
     margin-right: 2em;
+}
+
+.related-video-description {
+    overflow: hidden;
+}
+
+.related-video-description-title {
+    height: 18px;
+}
+
+.related-video-description-channeltitle {
+    height: 18px;
 }

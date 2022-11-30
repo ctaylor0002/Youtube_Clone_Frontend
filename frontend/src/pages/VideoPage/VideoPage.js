@@ -120,9 +120,15 @@ const VideoPage = (props) => {
             <Link to={`/${relatedVideo.id.videoId}`} key={relatedVideo.id.videoId}>
               <div className="video" >
                 <img src={relatedVideo.snippet.thumbnails.medium.url} alt={relatedVideo.snippet.description}/>
-                <p key={relatedVideo.id.videoId}>
-                  {relatedVideo.snippet.title} - {relatedVideo.snippet.channelTitle}
-                </p>
+                <div className='related-video-description'>
+                  <p className="related-video-description-title" key={relatedVideo.id.videoId}>
+                    {relatedVideo.snippet.title}
+                  </p>
+                  <p className="related-video-description-channeltitle"key={relatedVideo.snippet.channelTitle}>
+                    {relatedVideo.snippet.channelTitle}
+                  </p>
+                </div>
+                
               </div>
             </Link>
           ))}
