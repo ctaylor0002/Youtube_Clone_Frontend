@@ -34,7 +34,7 @@ const HomePage = () => {
 
     const fetchHomeVideos = async () => {
       try {
-        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&maxResults=10&key=${KEY}`)
+        let response = await axios.get (`https://www.googleapis.com/youtube/v3/search?part=snippet&order=rating&type=video&videoDefinition=high&maxResults=9&key=${KEY}`)
         setVideos(response.data.items)
         console.log(response)
       } catch (error) {
@@ -55,24 +55,33 @@ const HomePage = () => {
 
   return (
     <div className="video-list-container">
-      {user ? (
-        <h1>Home Page for {user.username}!</h1>
-      ) : (
-        <h1>Welcome Guest!</h1>
-      )}
-      <form onSubmit={handleSearch}>
-        <input type='text' placeholder="Search for Videos" onChange={(event) => setSearchValue(event.target.value)}/>
-        <button type='submit'>Search</button>
-      </form>
+      <div className="search">
+        {user ? (
+          <h1>Home Page for {user.username}!</h1>
+        ) : (
+          <h1>Welcome Guest!</h1>
+        )}
+        <form onSubmit={handleSearch}>
+          <input type='text' placeholder="Search for Videos" onChange={(event) => setSearchValue(event.target.value)}/>
+          <button className="search-button" type='submit'>Search</button>
+        </form>
+      </div>
+      
       <div className="video-container">
         {videos &&
         videos.map((video) => (
           <Link to={`/${video.id.videoId}`} key={video.id.videoId} >
             <div className="video" >
               <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.description}/>
-              <p key={video.id.videoId}>
-                {video.snippet.title} - {video.snippet.channelTitle}
-              </p>
+              <div className="video-description">
+                <p key={video.id.videoId} className="video-description-title">
+                  <strong>{video.snippet.title}</strong>
+                </p>
+                <p key={video.snippet.description} className="video-description-channel">
+                  {video.snippet.channelTitle}
+                </p>
+              </div>
+              
             </div>
           </Link>
           

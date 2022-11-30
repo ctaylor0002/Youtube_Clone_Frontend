@@ -1,3 +1,10 @@
+.search {
+    margin-left: 2em;
+}
+
+.search-button {
+    margin-left: 2em;
+}
 
 .video-container {
     display: grid;
@@ -6,7 +13,9 @@
         "mid-l mid mid-r"
         "bot-l bot bot-r";
     width: 100%;
-    margin: auto; 
+    margin: auto;
+    margin-top: 2em; 
+    justify-content: center;
 }
 
 .video-container div {
@@ -15,9 +24,16 @@
     align-content: center;
     flex-wrap: wrap;
     margin-bottom: 20%;
+
 }
 
 .video {
     display: flex;
-
+    width: 320px
 }
+
+.video-description {
+    display: flex;
+    align-content: flex-start;
+}
+
